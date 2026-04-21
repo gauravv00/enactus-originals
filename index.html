@@ -1,0 +1,2445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enactus Originals | 2025-2026</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #141414;
+      --red: #E50914;
+      --red-dark: #b20710;
+      --white: #FFFFFF;
+      --gray: #808080;
+      --gray-light: #b3b3b3;
+      --card-bg: #1a1a1a;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #555;
+      border-radius: 2px;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10000;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+      transition: background 0.3s;
+    }
+
+    .nav.scrolled {
+      background: rgba(20, 20, 20, 0.97);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--red);
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px rgba(229, 9, 20, 0.4);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--white);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--gray-light);
+      cursor: pointer;
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+
+    .nav-link:hover {
+      color: var(--white);
+    }
+
+    /* ===== HERO (LANDING) ===== */
+    .hero-landing {
+      min-height: 100vh;
+      background:
+        linear-gradient(to right, rgba(20, 20, 20, 0.6) 0%, transparent 60%),
+        linear-gradient(to top, rgba(20, 20, 20, 0.9) 0%, transparent 50%),
+        url('images/hero_bg.jpg') center/cover no-repeat;
+      background-color: #0a0a0a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 48px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .hero-badge-logo {
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    .hero-badge-text {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gray-light);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      line-height: 0.95;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .hero-title .accent {
+      color: var(--red);
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--gray-light);
+      margin-bottom: 32px;
+      max-width: 500px;
+      line-height: 1.6;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+      font-size: 0.8rem;
+    }
+
+    .hero-meta-match {
+      color: #46d369;
+      font-weight: 700;
+    }
+
+    .hero-meta-year {
+      color: var(--gray-light);
+    }
+
+    .hero-meta-rating {
+      border: 1px solid var(--gray);
+      padding: 2px 8px;
+      color: var(--gray-light);
+      font-size: 0.75rem;
+    }
+
+    .hero-meta-seasons {
+      color: var(--gray-light);
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .hero-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gray-light);
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-play {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      color: #000;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-play:hover {
+      background: rgba(255, 255, 255, 0.85);
+      transform: scale(1.03);
+    }
+
+    .btn-info {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(109, 109, 110, 0.7);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      backdrop-filter: blur(4px);
+    }
+
+    .btn-info:hover {
+      background: rgba(109, 109, 110, 0.5);
+      transform: scale(1.03);
+    }
+
+    /* ===== PROFILE PICKER ===== */
+    .profile-section {
+      padding: 80px 48px 60px;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      font-size: 0.85rem;
+      color: var(--gray-light);
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .profiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+    }
+
+    .profile-card {
+      cursor: pointer;
+      position: relative;
+      border-radius: 6px;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+      aspect-ratio: 2/3;
+      background: #1a1a1a;
+      text-decoration: none;
+    }
+
+    .profile-card:hover {
+      transform: scale(1.1) translateY(-4px);
+      box-shadow: 0 0 0 3px var(--red), 0 20px 40px rgba(229, 9, 20, 0.6), 0 8px 20px rgba(0, 0, 0, 0.6);
+      z-index: 10;
+    }
+
+    .profile-card-img {
+      width: 100%;
+      height: 75%;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      position: relative;
+    }
+
+    .profile-card-img-placeholder {
+      width: 100%;
+      height: 75%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+    }
+
+    .profile-card-gradient {
+      position: absolute;
+      bottom: 25%;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(to top, #1a1a1a, transparent);
+    }
+
+    .profile-card-info {
+      padding: 12px 14px;
+      height: 25%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .profile-card-role {
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .profile-card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      line-height: 1.1;
+      color: #fff;
+    }
+
+    .profile-card-tagline {
+      font-size: 0.65rem;
+      color: var(--gray-light);
+      margin-top: 3px;
+      font-style: italic;
+      line-height: 1.3;
+    }
+
+    .profile-card-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--red);
+      color: var(--white);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    .profile-card-match {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #46d369;
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 2px;
+      backdrop-filter: blur(4px);
+    }
+
+    .profile-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(229, 9, 20, 0.0);
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .profile-card:hover .profile-card-overlay {
+      background: rgba(229, 9, 20, 0.08);
+    }
+
+    .play-icon-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    .profile-card:hover .play-icon-circle {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .play-icon-circle svg {
+      margin-left: 3px;
+    }
+
+    /* Colors for each card */
+    .card-azeem .profile-card-img-placeholder {
+      background: linear-gradient(135deg, #1a0a00, #3d1a00, #7a2d00);
+    }
+
+    .card-pranjal .profile-card-img-placeholder {
+      background: linear-gradient(135deg, #1a001a, #3d0030, #7a004a);
+    }
+
+    .card-manya .profile-card-img-placeholder {
+      background: linear-gradient(135deg, #001a1a, #003d3d, #006060);
+    }
+
+    .card-aditya .profile-card-img-placeholder {
+      background: linear-gradient(135deg, #00001a, #00003d, #00007a);
+    }
+
+    .card-kanisha .profile-card-img-placeholder {
+      background: linear-gradient(135deg, #1a1a00, #3d3d00, #6e6e00);
+    }
+
+    .card-prateek .profile-card-img-placeholder {
+      background: linear-gradient(135deg, #0a001a, #1f0040, #3d007a);
+    }
+
+    /* Avatar circles in placeholders */
+    .avatar-circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ===== BROWSE SECTION ===== */
+    .browse-cta {
+      padding: 0 48px 80px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .btn-browse {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 40px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      letter-spacing: 1px;
+    }
+
+    .btn-browse:hover {
+      background: var(--red-dark);
+      transform: scale(1.04);
+      box-shadow: 0 6px 24px rgba(229, 9, 20, 0.4);
+    }
+
+    .browse-hint {
+      font-size: 0.8rem;
+      color: var(--gray);
+      font-style: italic;
+    }
+
+    /* ===== ROW SECTIONS ===== */
+    .row-section {
+      padding: 0 0 48px;
+    }
+
+    .row-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 0 48px;
+      margin-bottom: 12px;
+    }
+
+    .row-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      color: var(--white);
+    }
+
+    .row-title .row-title-accent {
+      color: var(--red);
+    }
+
+    .row-explore {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--red);
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .row-explore:hover {
+      color: var(--white);
+    }
+
+    .row-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 8px 48px 16px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .row-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Episode cards */
+    .ep-card {
+      flex: 0 0 260px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+
+    .ep-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      border-color: rgba(229, 9, 20, 0.5);
+    }
+
+    .ep-card-thumb {
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(135deg, #222, #333);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ep-card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ep-card-thumb-placeholder {
+      font-size: 2.5rem;
+      opacity: 0.5;
+    }
+
+    .ep-number {
+      position: absolute;
+      bottom: 8px;
+      left: 10px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.25);
+      line-height: 1;
+    }
+
+    .ep-progress-bar {
+      height: 3px;
+      background: #444;
+      position: relative;
+    }
+
+    .ep-progress-fill {
+      height: 100%;
+      background: var(--red);
+      transition: width 0.3s;
+    }
+
+    .ep-card-body {
+      padding: 12px 14px;
+    }
+
+    .ep-card-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .ep-card-title {
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .ep-card-desc {
+      font-size: 0.72rem;
+      color: var(--gray-light);
+      line-height: 1.5;
+    }
+
+    /* Stat cards */
+    .stat-card {
+      flex: 0 0 200px;
+      border-radius: 6px;
+      padding: 20px;
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+
+    .stat-card:hover {
+      transform: scale(1.05);
+      border-color: rgba(229, 9, 20, 0.5);
+    }
+
+    .stat-icon {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--gray-light);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* Review cards */
+    .review-card {
+      flex: 0 0 300px;
+      border-radius: 6px;
+      padding: 20px;
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: transform 0.25s, border-color 0.25s;
+    }
+
+    .review-card:hover {
+      transform: scale(1.03);
+      border-color: rgba(229, 9, 20, 0.3);
+    }
+
+    .review-stars {
+      color: #f5c518;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    .review-quote {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--gray-light);
+      font-style: italic;
+      margin-bottom: 14px;
+    }
+
+    .review-author {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .review-author-role {
+      font-size: 0.68rem;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+
+    /* Gallery cards */
+    .gallery-card {
+      flex: 0 0 220px;
+      height: 140px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--card-bg);
+      cursor: pointer;
+      transition: transform 0.25s;
+      position: relative;
+    }
+
+    .gallery-card:hover {
+      transform: scale(1.05);
+    }
+
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .gallery-label {
+      font-size: 0.7rem;
+      color: var(--gray-light);
+      text-align: center;
+      padding: 0 10px;
+      line-height: 1.3;
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ===== INDIVIDUAL SERIES PAGE ===== */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* Hero Section */
+    .series-hero {
+      position: relative;
+      min-height: 85vh;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 60px;
+      overflow: hidden;
+    }
+
+    .series-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center top;
+      filter: brightness(0.5);
+    }
+
+    .series-hero-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(20, 20, 20, 0.9) 0%, rgba(20, 20, 20, 0.4) 60%, transparent 100%),
+        linear-gradient(to top, rgba(20, 20, 20, 1) 0%, rgba(20, 20, 20, 0) 50%);
+    }
+
+    .series-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 48px;
+      max-width: 720px;
+    }
+
+    .series-hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .series-hero-num {
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      padding: 4px 12px;
+      border-radius: 2px;
+    }
+
+    .series-hero-season {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gray-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .series-hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .series-hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-size: 0.8rem;
+    }
+
+    .series-match {
+      color: #46d369;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .series-year,
+    .series-seasons {
+      color: var(--gray-light);
+    }
+
+    .series-rating {
+      border: 1px solid var(--gray);
+      padding: 2px 8px;
+      color: var(--gray-light);
+      font-size: 0.72rem;
+    }
+
+    .series-hd {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--gray-light);
+      padding: 2px 6px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .series-desc {
+      font-size: 0.9rem;
+      color: var(--gray-light);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+
+    .series-genres {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .series-genre {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--gray-light);
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+    }
+
+    .series-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-skip {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gray-light);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 1px;
+    }
+
+    .btn-skip:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--white);
+    }
+
+    /* ===== BACK BUTTON ===== */
+    .back-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10000;
+      background: rgba(20, 20, 20, 0.95);
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(8px);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+      cursor: pointer;
+      transition: color 0.2s;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--red);
+    }
+
+    .back-nav-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      color: var(--red);
+      letter-spacing: 2px;
+    }
+
+    /* ===== TRIBUTE SECTION ===== */
+    .tribute-section {
+      padding: 60px 48px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .tribute-section .section-title {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .tribute-text {
+      font-size: 1.05rem;
+      color: var(--gray-light);
+      max-width: 640px;
+      margin: 0 auto 24px;
+      line-height: 1.8;
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .tribute-signature {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--red);
+      letter-spacing: 3px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      padding: 40px 48px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--red);
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+    }
+
+    .footer-text {
+      font-size: 0.75rem;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    .footer-text span {
+      color: var(--red);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .animate-in {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .animate-delay-1 {
+      animation-delay: 0.1s;
+      opacity: 0;
+    }
+
+    .animate-delay-2 {
+      animation-delay: 0.2s;
+      opacity: 0;
+    }
+
+    .animate-delay-3 {
+      animation-delay: 0.3s;
+      opacity: 0;
+    }
+
+    .animate-delay-4 {
+      animation-delay: 0.4s;
+      opacity: 0;
+    }
+
+    .animate-delay-5 {
+      animation-delay: 0.5s;
+      opacity: 0;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .nav {
+        padding: 12px 16px;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        gap: 16px;
+      }
+
+      .nav-logo {
+        font-size: 1.8rem;
+      }
+
+      .hero-landing,
+      .profile-section,
+      .browse-cta {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .row-header,
+      .row-scroll {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .series-hero-content,
+      .back-nav,
+      .tribute-section {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .profiles-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .hero-title {
+        font-size: 2.8rem;
+      }
+
+      .series-hero-title {
+        font-size: 2.5rem;
+      }
+
+      .ep-card {
+        flex: 0 0 200px;
+      }
+
+      .stat-card {
+        flex: 0 0 160px;
+        padding: 15px;
+      }
+
+      .stat-value {
+        font-size: 1.5rem;
+      }
+
+      .review-card {
+        flex: 0 0 260px;
+        padding: 15px;
+      }
+
+      .btn-play, .btn-info, .btn-browse {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+
+    .series-page-container {
+      animation: fadeIn 0.4s ease;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.08), transparent);
+      margin: 0 48px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-logo" onclick="showPage('home')">ENACTUS <span>ORIGINALS</span></div>
+    <div class="nav-links">
+      <a class="nav-link" onclick="showPage('home')">Home</a>
+      <a class="nav-link" onclick="scrollToProfiles()">Series</a>
+      <a class="nav-link" href="#">Memories</a>
+    </div>
+  </nav>
+
+  <!-- ===================== HOME PAGE ===================== -->
+  <div id="page-home" class="page active">
+
+    <!-- Hero Landing -->
+    <div class="hero-landing">
+      <div style="max-width: 620px;">
+        <div class="hero-badge animate-in animate-delay-1">
+          <span class="hero-badge-logo">ENACTUS</span>
+          <span class="hero-badge-text">Originals</span>
+        </div>
+        <h1 class="hero-title animate-in animate-delay-2">THE FINAL <span class="accent">SEASON</span></h1>
+        <p class="hero-subtitle animate-in animate-delay-3">Six extraordinary humans. One unforgettable tenure. A
+          limited series you didn't know you needed — but absolutely deserved.</p>
+        <div class="hero-meta animate-in animate-delay-3">
+          <span class="hero-meta-match">99% Match</span>
+          <span class="hero-meta-year">2025–26</span>
+          <span class="hero-meta-rating">Rated: Stressful</span>
+          <span class="hero-meta-seasons">1 Season · 6 Episodes</span>
+        </div>
+        <div class="hero-tags animate-in animate-delay-4">
+          <span class="hero-tag">Crisis Management</span>
+          <span class="hero-tag">Accidental Leadership</span>
+          <span class="hero-tag">Late Night Meetings</span>
+          <span class="hero-tag">Deadpan Humor</span>
+          <span class="hero-tag">Chai Breaks</span>
+        </div>
+        <div class="hero-buttons animate-in animate-delay-5">
+          <button class="btn-play" onclick="scrollToProfiles()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="black">
+              <polygon points="5,3 19,12 5,21" />
+            </svg>
+            Choose Your Series
+          </button>
+          <button class="btn-info" onclick="scrollToProfiles()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" stroke-linecap="round" stroke-width="3" />
+            </svg>
+            More Info
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Picker -->
+    <section class="profile-section" id="profiles">
+      <p class="section-label">Choose Your Series</p>
+      <h2 class="section-title">WHO'S WATCHING?</h2>
+      <p class="section-desc">Select a profile to enter their cinematic universe. Each series rated for emotional
+        damage.</p>
+
+      <div class="profiles-grid">
+
+        <!-- AZEEM -->
+        <div class="profile-card card-azeem" onclick="showSeries('azeem')">
+          <div class="profile-card-img-placeholder">
+            <div class="avatar-circle">AK</div>
+          </div>
+          <div class="profile-card-gradient"></div>
+          <div class="profile-card-badge">PRESIDENT</div>
+          <div class="profile-card-match">99% Chaos</div>
+          <div class="profile-card-info">
+            <div class="profile-card-role">The Last Dictator</div>
+            <div class="profile-card-name">AZEEM</div>
+            <div class="profile-card-tagline">"boiz, where's my chai?"</div>
+          </div>
+          <div class="profile-card-overlay">
+            <div class="play-icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#141414">
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRANJAL -->
+        <div class="profile-card card-pranjal" onclick="showSeries('pranjal')">
+          <div class="profile-card-img-placeholder">
+            <div class="avatar-circle">PP</div>
+          </div>
+          <div class="profile-card-gradient"></div>
+          <div class="profile-card-badge">VP</div>
+          <div class="profile-card-match">94% Glow</div>
+          <div class="profile-card-info">
+            <div class="profile-card-role">The Skincare Chronicles</div>
+            <div class="profile-card-name">PRANJAL</div>
+            <div class="profile-card-tagline">Core meets, SPF 50</div>
+          </div>
+          <div class="profile-card-overlay">
+            <div class="play-icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#141414">
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- MANYA -->
+        <div class="profile-card card-manya" onclick="showSeries('manya')">
+          <div class="profile-card-img-placeholder">
+            <div class="avatar-circle">MV</div>
+          </div>
+          <div class="profile-card-gradient"></div>
+          <div class="profile-card-badge">OPS HEAD</div>
+          <div class="profile-card-match">87% Unbothered</div>
+          <div class="profile-card-info">
+            <div class="profile-card-role">The Unopened Notification</div>
+            <div class="profile-card-name">MANYA</div>
+            <div class="profile-card-tagline">Cards in pocket, JHAAD in heart</div>
+          </div>
+          <div class="profile-card-overlay">
+            <div class="play-icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#141414">
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADITYA -->
+        <div class="profile-card card-aditya" onclick="showSeries('aditya')">
+          <div class="profile-card-img-placeholder">
+            <div class="avatar-circle">AV</div>
+          </div>
+          <div class="profile-card-gradient"></div>
+          <div class="profile-card-badge">MEDIA HEAD</div>
+          <div class="profile-card-match">100% Precise</div>
+          <div class="profile-card-info">
+            <div class="profile-card-role">Pixel Perfect</div>
+            <div class="profile-card-name">ADITYA</div>
+            <div class="profile-card-tagline">"ek chota sa task du?"</div>
+          </div>
+          <div class="profile-card-overlay">
+            <div class="play-icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#141414">
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- KANISHA -->
+        <div class="profile-card card-kanisha" onclick="showSeries('kanisha')">
+          <div class="profile-card-img-placeholder">
+            <div class="avatar-circle">KV</div>
+          </div>
+          <div class="profile-card-gradient"></div>
+          <div class="profile-card-badge">MEDIA HEAD</div>
+          <div class="profile-card-match">91% Adventurous</div>
+          <div class="profile-card-info">
+            <div class="profile-card-role">The Thailand Files</div>
+            <div class="profile-card-name">KANISHA</div>
+            <div class="profile-card-tagline">Saw something. In Thailand. At night.</div>
+          </div>
+          <div class="profile-card-overlay">
+            <div class="play-icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#141414">
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRATEEK -->
+        <div class="profile-card card-prateek" onclick="showSeries('prateek')">
+          <div class="profile-card-img-placeholder">
+            <div class="avatar-circle">PJ</div>
+          </div>
+          <div class="profile-card-gradient"></div>
+          <div class="profile-card-badge">SHILPKAAR</div>
+          <div class="profile-card-match">96% Built Different</div>
+          <div class="profile-card-info">
+            <div class="profile-card-role">The Shilpkaar Saga</div>
+            <div class="profile-card-name">PRATEEK</div>
+            <div class="profile-card-tagline">He didn't just build — he architected</div>
+          </div>
+          <div class="profile-card-overlay">
+            <div class="play-icon-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#141414">
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="browse-cta">
+      <button class="btn-browse" onclick="scrollToProfiles()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="3" y="14" width="7" height="7" rx="1" />
+          <rect x="14" y="14" width="7" height="7" rx="1" />
+        </svg>
+        Browse All Series
+      </button>
+      <p class="browse-hint">Click any card above to enter their cinematic universe →</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Trending Row: The Series -->
+    <div class="row-section" style="margin-top: 40px;">
+      <div class="row-header">
+        <h3 class="row-title">TRENDING NOW <span class="row-title-accent">— ENACTUS ORIGINALS</span></h3>
+        <span class="row-explore">Explore All</span>
+      </div>
+      <div class="row-scroll">
+        <div class="ep-card" onclick="showSeries('azeem')">
+          <div class="ep-card-thumb" style="background: linear-gradient(135deg, #3d1a00, #7a2d00);">
+            <div class="ep-card-thumb-placeholder">☕</div>
+            <div class="ep-number">01</div>
+          </div>
+          <div class="ep-progress-bar">
+            <div class="ep-progress-fill" style="width:75%"></div>
+          </div>
+          <div class="ep-card-body">
+            <div class="ep-card-label">The Last Dictator</div>
+            <div class="ep-card-title">Mohammed Azeem Khan</div>
+            <div class="ep-card-desc">Required chai to function. Ran the team with an iron fist and a ceramic cup.</div>
+          </div>
+        </div>
+        <div class="ep-card" onclick="showSeries('pranjal')">
+          <div class="ep-card-thumb" style="background: linear-gradient(135deg, #3d0030, #7a004a);">
+            <div class="ep-card-thumb-placeholder">✨</div>
+            <div class="ep-number">02</div>
+          </div>
+          <div class="ep-progress-bar">
+            <div class="ep-progress-fill" style="width:60%"></div>
+          </div>
+          <div class="ep-card-body">
+            <div class="ep-card-label">The Skincare Chronicles</div>
+            <div class="ep-card-title">Pranjal Prabhu</div>
+            <div class="ep-card-desc">Applied moisturizer mid-core-meet. Deadlines moisturized separately.</div>
+          </div>
+        </div>
+        <div class="ep-card" onclick="showSeries('manya')">
+          <div class="ep-card-thumb" style="background: linear-gradient(135deg, #003d3d, #006060);">
+            <div class="ep-card-thumb-placeholder">🃏</div>
+            <div class="ep-number">03</div>
+          </div>
+          <div class="ep-progress-bar">
+            <div class="ep-progress-fill" style="width:40%"></div>
+          </div>
+          <div class="ep-card-body">
+            <div class="ep-card-label">The Unopened Notification</div>
+            <div class="ep-card-title">Manya Vador</div>
+            <div class="ep-card-desc">Knew everything. Responded to nothing. Always had cards ready.</div>
+          </div>
+        </div>
+        <div class="ep-card" onclick="showSeries('aditya')">
+          <div class="ep-card-thumb" style="background: linear-gradient(135deg, #00003d, #00007a);">
+            <div class="ep-card-thumb-placeholder">📐</div>
+            <div class="ep-number">04</div>
+          </div>
+          <div class="ep-progress-bar">
+            <div class="ep-progress-fill" style="width:90%"></div>
+          </div>
+          <div class="ep-card-body">
+            <div class="ep-card-label">Pixel Perfect</div>
+            <div class="ep-card-title">Aditya Vikram</div>
+            <div class="ep-card-desc">The font was wrong. The kerning was wrong. Also ek chota sa task du?</div>
+          </div>
+        </div>
+        <div class="ep-card" onclick="showSeries('kanisha')">
+          <div class="ep-card-thumb" style="background: linear-gradient(135deg, #3d3d00, #6e6e00);">
+            <div class="ep-card-thumb-placeholder">🌙</div>
+            <div class="ep-number">05</div>
+          </div>
+          <div class="ep-progress-bar">
+            <div class="ep-progress-fill" style="width:55%"></div>
+          </div>
+          <div class="ep-card-body">
+            <div class="ep-card-label">The Thailand Files</div>
+            <div class="ep-card-title">Kanisha Vikal</div>
+            <div class="ep-card-desc">Went for the nightlife. Saw more than she bargained for. Details classified.</div>
+          </div>
+        </div>
+        <div class="ep-card" onclick="showSeries('prateek')">
+          <div class="ep-card-thumb" style="background: linear-gradient(135deg, #1f0040, #3d007a);">
+            <div class="ep-card-thumb-placeholder">🏗️</div>
+            <div class="ep-number">06</div>
+          </div>
+          <div class="ep-progress-bar">
+            <div class="ep-progress-fill" style="width:85%"></div>
+          </div>
+          <div class="ep-card-body">
+            <div class="ep-card-label">The Shilpkaar Saga</div>
+            <div class="ep-card-title">Pratik Jain</div>
+            <div class="ep-card-desc">He wasn't just a member — he was the foundation everything else was built on.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-logo">ENACTUS ORIGINALS</div>
+      <p class="footer-text">
+        Made with <span>♥</span> by the juniors of Enactus MPSTME.<br>
+        <span>© 2026 Enactus MPSTME</span>
+      </p>
+    </div>
+
+  </div><!-- end home page -->
+
+
+  <!-- ===================== AZEEM SERIES PAGE ===================== -->
+  <div id="page-azeem" class="page">
+    <div class="series-page-container">
+      <div class="back-nav">
+        <button class="back-btn" onclick="showPage('home')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15,18 9,12 15,6" />
+          </svg>
+          Back to Enactus Originals
+        </button>
+        <span class="back-nav-title">THE LAST DICTATOR</span>
+      </div>
+
+      <div class="series-hero">
+        <div class="series-hero-bg" style="background: linear-gradient(135deg, #2a0d00 0%, #6b1a00 40%, #3d0000 100%);">
+        </div>
+        <div
+          style="position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:80px;opacity:0.15;">
+          <span style="font-size:20rem;line-height:1;">☕</span>
+        </div>
+        <div class="series-hero-gradient"></div>
+        <div class="series-hero-content">
+          <div class="series-hero-eyebrow">
+            <span class="series-hero-num">ENACTUS ORIGINALS</span>
+            <span class="series-hero-season">Season 2025–26</span>
+          </div>
+          <h1 class="series-hero-title">THE LAST<br>DICTATOR</h1>
+          <div class="series-hero-meta">
+            <span class="series-match">99% Match with 'Seen' on WhatsApp</span>
+            <span class="series-year">2026</span>
+            <span class="series-rating">Rated: Constant Chai Breaks</span>
+            <span class="series-hd">4K</span>
+          </div>
+          <p class="series-desc">
+            Mohammed Azeem Khan — the man, the myth, the <em>boiz</em>. He ruled the Enactus kingdom with chai in one
+            hand and a vision nobody understood but everyone followed. A president so committed to his beverage of
+            choice, the team seriously considered installing a tea station in the meeting room. Featuring his legendary
+            ability to go "seen" on WhatsApp and reappear days later with the energy of someone who never left.
+          </p>
+          <div class="series-genres">
+            <span class="series-genre">Chai Addiction</span>
+            <span class="series-genre">Selective Availability</span>
+            <span class="series-genre">Crisis Management</span>
+            <span class="series-genre">Boiz-Mode Leadership</span>
+          </div>
+          <div class="series-buttons">
+            <button class="btn-play">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="black">
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+              Play Season 1
+            </button>
+            <button class="btn-info" style="background:rgba(109,109,110,0.7);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" stroke-linecap="round" stroke-width="3" />
+              </svg>
+              More Info
+            </button>
+            <button class="btn-skip"
+              onclick="document.getElementById('azeem-tribute').scrollIntoView({behavior:'smooth'})">⏭ Skip
+              Intro</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Episodes Row -->
+      <div class="row-section" style="padding-top: 48px;">
+        <div class="row-header">
+          <h3 class="row-title">CONTINUE WATCHING <span class="row-title-accent">— AZEEM'S ARC</span></h3>
+        </div>
+        <div class="row-scroll">
+          <!-- Mine -->
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#2a0d00,#6b1a00);">
+              <div class="ep-card-thumb-placeholder">🚪</div>
+              <div class="ep-number">01</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:100%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E1 · The Lounge Gate</div>
+              <div class="ep-card-title">"Bhandhari aur Khan kaise cousins?"</div>
+              <div class="ep-card-desc">Dhruv got everyone the lounge access except the President.</div>
+            </div>
+          </div>
+          <!-- User's -->
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#2a0d00,#6b1a00);">
+              <div class="ep-card-thumb-placeholder">🎤</div>
+              <div class="ep-number">02</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:100%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E2 · The Interview</div>
+              <div class="ep-card-title">A Man, A Dream, A Cup of Chai</div>
+              <div class="ep-card-desc">He walked in. He said "boiz." Nobody knew what was happening. Everyone was in.
+              </div>
+            </div>
+          </div>
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#3d1a00,#7a2d00);">
+              <div class="ep-card-thumb-placeholder">🌀</div>
+              <div class="ep-number">03</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:70%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E3 · Mid-Year Crisis</div>
+              <div class="ep-card-title">Boiz, We Need to Talk</div>
+              <div class="ep-card-desc">WhatsApp messages go unanswered. He appears at 11pm with a full strategy deck.
+              </div>
+            </div>
+          </div>
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#5c2600,#9a4200);">
+              <div class="ep-card-thumb-placeholder">☕</div>
+              <div class="ep-number">04</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:35%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E4 · Chai Emergency</div>
+              <div class="ep-card-title">We Ran Out</div>
+              <div class="ep-card-desc">Critical infrastructure failure. Someone was dispatched. Azeem remained
+                unbothered.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="row-section">
+        <div class="row-header">
+          <h3 class="row-title">TRENDING STATS <span class="row-title-accent">— AZEEM EDITION</span></h3>
+        </div>
+        <div class="row-scroll">
+          <div class="stat-card">
+            <div class="stat-icon">☕</div>
+            <div class="stat-value">∞</div>
+            <div class="stat-label">Cups of chai consumed. Counting stopped in Q2.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📱</div>
+            <div class="stat-value">99%</div>
+            <div class="stat-label">Match with "Seen" on WhatsApp but zero replies</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🤙</div>
+            <div class="stat-value">2000</div>
+            <div class="stat-label">Baht Only. The international standard of joking.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💬</div>
+            <div class="stat-value">847</div>
+            <div class="stat-label">Times "boiz" was uttered in official capacities</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviews -->
+      <div class="row-section">
+        <div class="row-header">
+          <h3 class="row-title">AUDIENCE REVIEWS <span class="row-title-accent">— TOP PICKS</span></h3>
+        </div>
+        <div class="row-scroll">
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">"5 star ho sir aap toh! We will always remember your finetouch... but brownies kab
+              khilaoge?"</p>
+            <div class="review-author">Gaurav and Kavya</div>
+            <div class="review-author-role">Core Members</div>
+          </div>
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">"I sent him a message at 2pm. He replied at 11:45pm with 'boiz saw this just now.'
+              He had seen it at 2:01pm."</p>
+            <div class="review-author">A Junior, First Year</div>
+            <div class="review-author-role">Witnessed the Seen Timestamp</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tribute-section" id="azeem-tribute">
+        <p class="section-label">Final Episode</p>
+        <h2 class="section-title">TO AZEEM — THE LAST DICTATOR</h2>
+        <p class="tribute-text">
+          Behind every "boiz" was a leader who genuinely cared. Enactus MPSTME ran because of your energy and chaos.
+          We'll miss you more than we'll ever admit. Keep making chai.
+        </p>
+        <div class="tribute-signature">ENACTUS ORIGINALS · SERIES FINALE</div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-logo">ENACTUS ORIGINALS</div>
+        <p class="footer-text"><span>© 2026 Enactus MPSTME</span></p>
+      </div>
+    </div>
+  </div><!-- end azeem page -->
+
+
+  <!-- ===================== PRANJAL SERIES PAGE ===================== -->
+  <div id="page-pranjal" class="page">
+    <div class="series-page-container">
+      <div class="back-nav">
+        <button class="back-btn" onclick="showPage('home')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15,18 9,12 15,6" />
+          </svg>
+          Back to Enactus Originals
+        </button>
+        <span class="back-nav-title">THE SKINCARE CHRONICLES</span>
+      </div>
+
+      <div class="series-hero">
+        <div class="series-hero-bg" style="background: linear-gradient(135deg, #2a0020 0%, #6b004a 40%, #3d0030 100%);">
+        </div>
+        <div
+          style="position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:80px;opacity:0.12;">
+          <span style="font-size:18rem;line-height:1;">✨</span>
+        </div>
+        <div class="series-hero-gradient"></div>
+        <div class="series-hero-content">
+          <div class="series-hero-eyebrow">
+            <span class="series-hero-num">ENACTUS ORIGINALS</span>
+            <span class="series-hero-season">Season 2025–26</span>
+          </div>
+          <h1 class="series-hero-title">THE SKINCARE<br>CHRONICLES</h1>
+          <div class="series-hero-meta">
+            <span class="series-match">94% Match with SPF 50</span>
+            <span class="series-year">2026</span>
+            <span class="series-rating">Rated: Glowing Through Crisis</span>
+            <span class="series-hd">HD</span>
+          </div>
+          <p class="series-desc">
+            Pranjal Prabhu — the VP who taught us that a core meeting is no reason to skip your skincare routine. While
+            strategies were being debated and timelines were imploding, Pranjal maintained her glow with the same
+            steadiness she brought to every role. Perfectly focused when food was on the table.
+          </p>
+          <div class="series-genres">
+            <span class="series-genre">Skincare During Crisis</span>
+            <span class="series-genre">Food-Motivated Leadership</span>
+            <span class="series-genre">Strategic Glow</span>
+            <span class="series-genre">SPF All Year</span>
+          </div>
+          <div class="series-buttons">
+            <button class="btn-play">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="black">
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+              Play Season 1
+            </button>
+            <button class="btn-info" style="background:rgba(109,109,110,0.7);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" stroke-linecap="round" stroke-width="3" />
+              </svg>
+              More Info
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Episodes -->
+      <div class="row-section" style="padding-top: 48px;">
+        <div class="row-header">
+          <h3 class="row-title">CONTINUE WATCHING <span class="row-title-accent">— PRANJAL'S ARC</span></h3>
+        </div>
+        <div class="row-scroll">
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#2a0020,#6b004a);">
+              <div class="ep-card-thumb-placeholder">🌸</div>
+              <div class="ep-number">01</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:100%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E1 · The Interview</div>
+              <div class="ep-card-title">Moisturized and Ready</div>
+              <div class="ep-card-desc">She walked in, glowing. The committee was concerned about their own cleanser
+                choice.</div>
+            </div>
+          </div>
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#3d0030,#7a004a);">
+              <div class="ep-card-thumb-placeholder">🍕</div>
+              <div class="ep-number">02</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:80%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E2 · Core Meet Incident</div>
+              <div class="ep-card-title">SPF Mid-Strategy</div>
+              <div class="ep-card-desc">Strategy discussion paused. Moisturizer applied. Discussion resumed. Leadership.
+              </div>
+            </div>
+          </div>
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#5c0040,#9a006e);">
+              <div class="ep-card-thumb-placeholder">🍽️</div>
+              <div class="ep-number">03</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:45%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E3 · Lunch Power Move</div>
+              <div class="ep-card-title">Food = Focus</div>
+              <div class="ep-card-desc">When food arrived, Pranjal achieved a level of clarity no strategy document
+                could replicate.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="row-section">
+        <div class="row-header">
+          <h3 class="row-title">TRENDING STATS <span class="row-title-accent">— PRANJAL EDITION</span></h3>
+        </div>
+        <div class="row-scroll">
+          <div class="stat-card">
+            <div class="stat-icon">✨</div>
+            <div class="stat-value">94%</div>
+            <div class="stat-label">Match with "Best Skincare Routine Mid-Meeting" category</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🍽️</div>
+            <div class="stat-value">TOP 1</div>
+            <div class="stat-label">In "Most Focused When There's Food on the Table" charts</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviews -->
+      <div class="row-section">
+        <div class="row-header">
+          <h3 class="row-title">AUDIENCE REVIEWS <span class="row-title-accent">— TOP PICKS</span></h3>
+        </div>
+        <div class="row-scroll">
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">"She applied skincare in the middle of a meeting and I've never felt more called
+              out. My moisturizer is now in my bag."</p>
+            <div class="review-author">Core Team Member</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-logo">ENACTUS ORIGINALS</div>
+        <p class="footer-text"><span>© 2026 Enactus MPSTME</span></p>
+      </div>
+    </div>
+  </div><!-- end pranjal page -->
+
+
+  <!-- ===================== MANYA SERIES PAGE ===================== -->
+  <div id="page-manya" class="page">
+    <div class="series-page-container">
+      <div class="back-nav">
+        <button class="back-btn" onclick="showPage('home')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15,18 9,12 15,6" />
+          </svg>
+          Back to Enactus Originals
+        </button>
+        <span class="back-nav-title">THE UNOPENED NOTIFICATION</span>
+      </div>
+
+      <div class="series-hero">
+        <div class="series-hero-bg" style="background: linear-gradient(135deg, #001a1a 0%, #006060 40%, #003d3d 100%);">
+        </div>
+        <div
+          style="position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:80px;opacity:0.12;">
+          <span style="font-size:18rem;line-height:1;">🃏</span>
+        </div>
+        <div class="series-hero-gradient"></div>
+        <div class="series-hero-content">
+          <div class="series-hero-eyebrow">
+            <span class="series-hero-num">ENACTUS ORIGINALS</span>
+            <span class="series-hero-season">Season 2025–26</span>
+          </div>
+          <h1 class="series-hero-title">THE UNOPENED<br>NOTIFICATION</h1>
+          <div class="series-hero-meta">
+            <span class="series-match">87% Match with Pure Unbothered Energy</span>
+            <span class="series-year">2026</span>
+            <span class="series-rating">Rated: JHAAD</span>
+            <span class="series-hd">HD</span>
+          </div>
+          <p class="series-desc">
+            Manya Vador — Head of Operations, carrier of card games, and certified keeper of secrets. She ran ops with
+            the energy of someone who knows exactly what's happening but has chosen, strategically, to let it unfold.
+            "Aaj se sab band" is her motto... right before the pizza arrives.
+          </p>
+          <div class="series-genres">
+            <span class="series-genre">Strategic Silence</span>
+            <span class="series-genre">Card Game Diplomacy</span>
+            <span class="series-genre">"Aaj Se Band" Lie</span>
+            <span class="series-genre">JHAAD Energy</span>
+          </div>
+          <div class="series-buttons">
+            <button class="btn-play">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="black">
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+              Play Season 1
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Episodes -->
+      <div class="row-section" style="padding-top: 48px;">
+        <div class="row-header">
+          <h3 class="row-title">CONTINUE WATCHING <span class="row-title-accent">— MANYA'S ARC</span></h3>
+        </div>
+        <div class="row-scroll">
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#001a1a,#006060);">
+              <div class="ep-card-thumb-placeholder">🍕</div>
+              <div class="ep-number">01</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:100%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E1 · The Diet Lie</div>
+              <div class="ep-card-title">"Aaj se sab band"</div>
+              <div class="ep-card-desc">The declaration that preceded a 3-course meal. Every time.</div>
+            </div>
+          </div>
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#001a1a,#006060);">
+              <div class="ep-card-thumb-placeholder">📵</div>
+              <div class="ep-number">02</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:65%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E2 · Selective Participation</div>
+              <div class="ep-card-title">The Group Chat Incident</div>
+              <div class="ep-card-desc">The group pinged. She saw it. She responded when the time was right — later.
+                Much later.</div>
+            </div>
+          </div>
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#005555,#00a0a0);">
+              <div class="ep-card-thumb-placeholder">🗣️</div>
+              <div class="ep-number">03</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:30%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E3 · Gossip Intelligence</div>
+              <div class="ep-card-title">She Already Knew</div>
+              <div class="ep-card-desc">By the time the gossip reached the table, Manya had already verified it.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="row-section">
+        <div class="row-header">
+          <h3 class="row-title">TRENDING STATS <span class="row-title-accent">— MANYA EDITION</span></h3>
+        </div>
+        <div class="row-scroll">
+          <div class="stat-card">
+            <div class="stat-icon">🃏</div>
+            <div class="stat-value">∞</div>
+            <div class="stat-label">Card games carried at all times. Every location.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-value">JHAAD</div>
+            <div class="stat-label">Signature energy level. Deployed strategically.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-logo">ENACTUS ORIGINALS</div>
+        <p class="footer-text"><span>© 2026 Enactus MPSTME</span></p>
+      </div>
+    </div>
+  </div><!-- end manya page -->
+
+
+  <!-- ===================== ADITYA SERIES PAGE ===================== -->
+  <div id="page-aditya" class="page">
+    <div class="series-page-container">
+      <div class="back-nav">
+        <button class="back-btn" onclick="showPage('home')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15,18 9,12 15,6" />
+          </svg>
+          Back to Enactus Originals
+        </button>
+        <span class="back-nav-title">PIXEL PERFECT</span>
+      </div>
+
+      <div class="series-hero">
+        <div class="series-hero-bg" style="background: linear-gradient(135deg, #00001a 0%, #000060 40%, #00007a 100%);">
+        </div>
+        <div
+          style="position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:80px;opacity:0.1;">
+          <span style="font-size:18rem;line-height:1;">📐</span>
+        </div>
+        <div class="series-hero-gradient"></div>
+        <div class="series-hero-content">
+          <div class="series-hero-eyebrow">
+            <span class="series-hero-num">ENACTUS ORIGINALS</span>
+            <span class="series-hero-season">Season 2025–26</span>
+          </div>
+          <h1 class="series-hero-title">PIXEL<br>PERFECT</h1>
+          <div class="series-hero-meta">
+            <span class="series-match">100% Match with Design Precision</span>
+            <span class="series-year">2026</span>
+            <span class="series-rating">Rated: Specs Structural Failure</span>
+            <span class="series-hd">4K</span>
+          </div>
+          <p class="series-desc">
+            Aditya Vikram — Media Head, master of neat rum shots, and architect of "ek chota sa task du?" He sees
+            misaligned elements immediately. His specs survived Chiplun but not Rayansh's hug.
+          </p>
+          <div class="series-genres">
+            <span class="series-genre">Font Size: Critical</span>
+            <span class="series-genre">Pixel Policing</span>
+            <span class="series-genre">Chiplun Spirits</span>
+            <span class="series-genre">"Chota Sa" Tasks</span>
+          </div>
+          <div class="series-buttons">
+            <button class="btn-play">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="black">
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+              Play Season 1
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Episodes -->
+      <div class="row-section" style="padding-top: 48px;">
+        <div class="row-header">
+          <h3 class="row-title">CONTINUE WATCHING <span class="row-title-accent">— ADITYA'S ARC</span></h3>
+        </div>
+        <div class="row-scroll">
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#00001a,#000060);">
+              <div class="ep-card-thumb-placeholder">🥃</div>
+              <div class="ep-number">01</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:100%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E1 · Chiplun Spirits</div>
+              <div class="ep-card-title">Rum Shots with Aditi</div>
+              <div class="ep-card-desc">The legendary night of doing neat shots in Chiplun. Test of character.</div>
+            </div>
+          </div>
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#00003d,#00007a);">
+              <div class="ep-card-thumb-placeholder">🕶️</div>
+              <div class="ep-number">02</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:100%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E2 · The Hug Incident</div>
+              <div class="ep-card-title">Broken Specs</div>
+              <div class="ep-card-desc">Rayansh's hug was so powerful, it literally shattered Aditya's glasses.</div>
+            </div>
+          </div>
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#00001a,#000060);">
+              <div class="ep-card-thumb-placeholder">📐</div>
+              <div class="ep-number">03</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:100%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E3 · The Interview</div>
+              <div class="ep-card-title">Wrong Font, Wrong Room</div>
+              <div class="ep-card-desc">He noticed the title slide used Arial. This was the beginning of an era.</div>
+            </div>
+          </div>
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#00003d,#00007a);">
+              <div class="ep-card-thumb-placeholder">💬</div>
+              <div class="ep-number">04</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:75%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E4 · Ek Chota Sa Task</div>
+              <div class="ep-card-title">Part 1 of 47</div>
+              <div class="ep-card-desc">"Ek chota sa task du?" The task was never small. The font audit took 3 hours.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="row-section">
+        <div class="row-header">
+          <h3 class="row-title">TRENDING STATS <span class="row-title-accent">— ADITYA EDITION</span></h3>
+        </div>
+        <div class="row-scroll">
+          <div class="stat-card">
+            <div class="stat-icon">📐</div>
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Match with "Notice a 1px Misalignment" category.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💬</div>
+            <div class="stat-value">47</div>
+            <div class="stat-label">Times "ek chota sa task du" was said.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🕶️</div>
+            <div class="stat-value">0%</div>
+            <div class="stat-label">Specs Integrity after Rayansh hug.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-logo">ENACTUS ORIGINALS</div>
+        <p class="footer-text"><span>© 2026 Enactus MPSTME</span></p>
+      </div>
+    </div>
+  </div><!-- end aditya page -->
+
+
+  <!-- ===================== KANISHA SERIES PAGE ===================== -->
+  <div id="page-kanisha" class="page">
+    <div class="series-page-container">
+      <div class="back-nav">
+        <button class="back-btn" onclick="showPage('home')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15,18 9,12 15,6" />
+          </svg>
+          Back to Enactus Originals
+        </button>
+        <span class="back-nav-title">THE THAILAND FILES</span>
+      </div>
+
+      <div class="series-hero">
+        <div class="series-hero-bg" style="background: linear-gradient(135deg, #1a1a00 0%, #5a5a00 40%, #4a4a00 100%);">
+        </div>
+        <div
+          style="position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:80px;opacity:0.12;">
+          <span style="font-size:18rem;line-height:1;">🌙</span>
+        </div>
+        <div class="series-hero-gradient"></div>
+        <div class="series-hero-content">
+          <div class="series-hero-eyebrow">
+            <span class="series-hero-num">ENACTUS ORIGINALS</span>
+            <span class="series-hero-season">Season 2025–26</span>
+          </div>
+          <h1 class="series-hero-title">THE<br>THAILAND FILES</h1>
+          <div class="series-hero-meta">
+            <span class="series-match">91% Match with Adventurous Spirit</span>
+            <span class="series-year">2026</span>
+            <span class="series-rating">Rated: Classified Adventures</span>
+            <span class="series-hd">HD</span>
+          </div>
+          <p class="series-desc">
+            Kanisha Vikal — Media Head, Creative Force, and Legend of the Hotel Window. Whether it's the classified
+            "disguise" mission to explore the nightlife or the sudden "atma" encounter at the window, her Thailand saga
+            is the stuff of Enactus legend.
+          </p>
+          <div class="series-genres">
+            <span class="series-genre">Classified Adventures</span>
+            <span class="series-genre">Atma Encounters</span>
+            <span class="series-genre">Mouth-Open Sleep</span>
+            <span class="series-genre">The Thailand Doctrine</span>
+          </div>
+          <div class="series-buttons">
+            <button class="btn-play">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="black">
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+              Play Season 1
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Episodes -->
+      <div class="row-section" style="padding-top: 48px;">
+        <div class="row-header">
+          <h3 class="row-title">CONTINUE WATCHING <span class="row-title-accent">— KANISHA'S ARC</span></h3>
+        </div>
+        <div class="row-scroll">
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#1a1a00,#5a5a00);">
+              <div class="ep-card-thumb-placeholder">😴</div>
+              <div class="ep-number">01</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:100%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E1 · Rest Mode</div>
+              <div class="ep-card-title">The Open Mouth Skill</div>
+              <div class="ep-card-desc">Sleeping with mouth wide open. A rare creative phenomenon.</div>
+            </div>
+          </div>
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#3a3a00,#7a7a00);">
+              <div class="ep-card-thumb-placeholder">✈️</div>
+              <div class="ep-number">02</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:70%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E2 · Thailand</div>
+              <div class="ep-card-title">The Hotel Window</div>
+              <div class="ep-card-desc">The nightlife was the plan. The "atma" at the hotel window was the uninvited
+                guest.</div>
+            </div>
+          </div>
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#505000,#909000);">
+              <div class="ep-card-thumb-placeholder">🕵️‍♀️</div>
+              <div class="ep-number">03</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:45%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E3 · The Mission</div>
+              <div class="ep-card-title">Nightlife Disguise</div>
+              <div class="ep-card-desc">Willing to go to any lengths for the experience—even if it meant dressing like a
+                male. Strategy: 10/10. Execution: Classified.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="row-section">
+        <div class="row-header">
+          <h3 class="row-title">TRENDING STATS <span class="row-title-accent">— KANISHA EDITION</span></h3>
+        </div>
+        <div class="row-scroll">
+          <div class="stat-card">
+            <div class="stat-icon">🌙</div>
+            <div class="stat-value">1</div>
+            <div class="stat-label">Hotel window incident. Officially legend.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">😴</div>
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Jaw Relaxation during rest.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-logo">ENACTUS ORIGINALS</div>
+        <p class="footer-text"><span>© 2026 Enactus MPSTME</span></p>
+      </div>
+    </div>
+  </div><!-- end kanisha page -->
+
+
+  <!-- ===================== PRATEEK SERIES PAGE ===================== -->
+  <div id="page-prateek" class="page">
+    <div class="series-page-container">
+      <div class="back-nav">
+        <button class="back-btn" onclick="showPage('home')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15,18 9,12 15,6" />
+          </svg>
+          Back to Enactus Originals
+        </button>
+        <span class="back-nav-title">THE SHILPKAAR SAGA</span>
+      </div>
+
+      <div class="series-hero">
+        <div class="series-hero-bg" style="background: linear-gradient(135deg, #0a001a 0%, #300060 40%, #1a003d 100%);">
+        </div>
+        <div
+          style="position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:80px;opacity:0.1;">
+          <span style="font-size:18rem;line-height:1;">🏗️</span>
+        </div>
+        <div class="series-hero-gradient"></div>
+        <div class="series-hero-content">
+          <div class="series-hero-eyebrow">
+            <span class="series-hero-num">ENACTUS ORIGINALS</span>
+            <span class="series-hero-season">Season 2025–26</span>
+          </div>
+          <h1 class="series-hero-title">THE<br>SHILPKAAR SAGA</h1>
+          <div class="series-hero-meta">
+            <span class="series-match">96% Match with Built Different</span>
+            <span class="series-year">2026</span>
+            <span class="series-rating">Rated: Architect of Excellence</span>
+            <span class="series-hd">HD</span>
+          </div>
+          <p class="series-desc">
+            Pratik Jain — the Shilpkaar. He didn't just build Enactus — he architected the foundation. The Scooty
+            Philosopher who thinks about coming back while leaving. Legendary for his faculty laptop "optimization."
+          </p>
+          <div class="series-genres">
+            <span class="series-genre">Systems Builder</span>
+            <span class="series-genre">Scooty Wisdom</span>
+            <span class="series-genre">Grade Heist</span>
+            <span class="series-genre">Foundation Layer</span>
+          </div>
+          <div class="series-buttons">
+            <button class="btn-play">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="black">
+                <polygon points="5,3 19,12 5,21" />
+              </svg>
+              Play Season 1
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Episodes -->
+      <div class="row-section" style="padding-top: 48px;">
+        <div class="row-header">
+          <h3 class="row-title">CONTINUE WATCHING <span class="row-title-accent">— PRATEEK'S ARC</span></h3>
+        </div>
+        <div class="row-scroll">
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#0a001a,#300060);">
+              <div class="ep-card-thumb-placeholder">🛵</div>
+              <div class="ep-number">01</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:100%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E1 · Scooty Philosopher</div>
+              <div class="ep-card-title">Jaipur Wisdom</div>
+              <div class="ep-card-desc">"Scooty pe jaate jaate wapis aane baare mai sochta hu."</div>
+            </div>
+          </div>
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#1a003d,#4a00a0);">
+              <div class="ep-card-thumb-placeholder">💻</div>
+              <div class="ep-number">02</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:100%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E2 · The Hacker</div>
+              <div class="ep-card-title">Grade Heist</div>
+              <div class="ep-card-desc">The time he optimized marks directly from a faculty member's laptop.</div>
+            </div>
+          </div>
+          <div class="ep-card">
+            <div class="ep-card-thumb" style="background:linear-gradient(135deg,#28005c,#5e00c0);">
+              <div class="ep-card-thumb-placeholder">⚒️</div>
+              <div class="ep-number">03</div>
+            </div>
+            <div class="ep-progress-bar">
+              <div class="ep-progress-fill" style="width:45%"></div>
+            </div>
+            <div class="ep-card-body">
+              <div class="ep-card-label">S1:E3 · The Shilpkaar's Method</div>
+              <div class="ep-card-title">Craft Over Speed</div>
+              <div class="ep-card-desc">Others rushed. He architected. The foundation remains.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="row-section">
+        <div class="row-header">
+          <h3 class="row-title">TRENDING STATS <span class="row-title-accent">— PRATEEK EDITION</span></h3>
+        </div>
+        <div class="row-scroll">
+          <div class="stat-card">
+            <div class="stat-icon">🏗️</div>
+            <div class="stat-value">∞</div>
+            <div class="stat-label">Systems built that still hold today.</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⚒️</div>
+            <div class="stat-value">96%</div>
+            <div class="stat-label">Match with "Built Different · Architect Mode"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-logo">ENACTUS ORIGINALS</div>
+        <p class="footer-text"><span>© 2026 Enactus MPSTME</span></p>
+      </div>
+    </div>
+  </div><!-- end prateek page -->
+
+
+  <script>
+    // Nav scroll effect
+    window.addEventListener('scroll', () => {
+      document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Page routing
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + pageId).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showSeries(id) {
+      showPage(id);
+    }
+
+    function scrollToProfiles() {
+      showPage('home');
+      setTimeout(() => {
+        document.getElementById('profiles').scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+
+    // Horizontal scroll with mouse wheel
+    document.querySelectorAll('.row-scroll').forEach(row => {
+      row.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+          e.preventDefault();
+          row.scrollLeft += e.deltaY * 1.2;
+        }
+      }, { passive: false });
+    });
+  </script>
+</body>
+
+</html>
